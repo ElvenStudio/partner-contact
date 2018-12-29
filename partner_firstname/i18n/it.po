@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: partner-contact (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-03 00:45+0000\n"
-"PO-Revision-Date: 2016-07-02 21:38+0000\n"
+"PO-Revision-Date: 2018-12-29 11:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-partner-contact-8-0/"
 "language/it/)\n"
@@ -21,25 +21,118 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: partner_firstname
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,create_uid:0
+msgid "Created by"
+msgstr ""
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,create_date:0
+msgid "Created on"
+msgstr ""
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_firstname
 #: code:addons/partner_firstname/models/exceptions.py:25
 #, python-format
 msgid "Error(s) with partner %d's name."
 msgstr "Errore(i) con il nome del partner %d."
 
 #. module: partner_firstname
-#: field:res.partner,firstname:0
-msgid "First name"
-msgstr "Nome"
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:27
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "First Middle/Last last"
+msgstr "Nome nome/Cognome cognome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:25
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "First middle/Last"
+msgstr "Nome nome/Cognome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:21
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "First/Last"
+msgstr "Nome/Cognome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:26
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "First/Last last"
+msgstr "Nome/Cognome cognome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:18
+#: field:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "Format"
+msgstr "Formato"
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,id:0
+msgid "ID"
+msgstr "ID"
 
 #. module: partner_firstname
 #: view:res.partner:partner_firstname.view_partner_form_firstname
 msgid "Is a Company?"
-msgstr "È un'azienda?"
+msgstr "E' un'azienda?"
 
 #. module: partner_firstname
-#: field:res.partner,lastname:0
-msgid "Last name"
-msgstr "Cognome"
+#: field:res.partner.split_name_wizard,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: partner_firstname
+#: field:res.partner.split_name_wizard,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:23
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "Last last/First"
+msgstr "Cognome cognome/Nome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:24
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "Last last/First Middle"
+msgstr "Cognome cognome/Nome nome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:20
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "Last/First"
+msgstr "Cognome/Nome"
+
+#. module: partner_firstname
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:22
+#: selection:res.partner.split_name_wizard,split_mode:0
+#, python-format
+msgid "Last/First Middle"
+msgstr "Cognome/Nome nome"
 
 #. module: partner_firstname
 #: code:addons/partner_firstname/models/exceptions.py:22
@@ -48,9 +141,19 @@ msgid "No name is set."
 msgstr "Nessun nome impostato."
 
 #. module: partner_firstname
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "Note:"
+msgstr "Note:"
+
+#. module: partner_firstname
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "Once you choose the split mode and confirm, the operation cannot be undone."
+msgstr "Quando scegli la modalità di separazione e confermi, l'operazione non può essere annullata."
+
+#. module: partner_firstname
 #: help:base.config.settings,partner_names_order:0
 msgid "Order to compose partner fullname"
-msgstr ""
+msgstr "Ordine per comporre il nome completo del partner"
 
 #. module: partner_firstname
 #: model:ir.model,name:partner_firstname.model_res_partner
@@ -58,38 +161,54 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: partner_firstname
+#: field:res.partner.split_name_wizard,partner_ids:0
+msgid "Partner ids"
+msgstr "Partners"
+
+#. module: partner_firstname
 #: field:base.config.settings,partner_names_order:0
 msgid "Partner names order"
-msgstr ""
+msgstr "Ordine dei nomi dei partner"
 
 #. module: partner_firstname
 #: field:base.config.settings,partner_names_order_changed:0
 msgid "Partner names order changed"
-msgstr ""
+msgstr "L'ordine del nome del partner è cambiato"
 
 #. module: partner_firstname
 #: view:base.config.settings:partner_firstname.view_general_configuration
 msgid "Recalculate names"
-msgstr ""
+msgstr "Ricalcola nomi"
 
 #. module: partner_firstname
 #: view:base.config.settings:partner_firstname.view_general_configuration
-msgid ""
-"Recalculate names for all partners. This process could take so much time if "
-"there are more than 10,000 active partners"
-msgstr ""
+msgid "Recalculate names for all partners. This process could take so much time if there are more than 10,000 active partners"
+msgstr "Ricalcola nomi per tutti i partner. Questo processo può richiedere molto tempo se ci sono più di 10,000 partner attivi"
 
 #. module: partner_firstname
-#: view:res.users:partner_firstname.view_users_form
-msgid "True"
-msgstr "Vero"
+#: code:addons/partner_firstname/wizards/res_partner_split_name_wizard.py:9
+#: model:ir.model,name:partner_firstname.model_res_partner_split_name_wizard
+#, python-format
+msgid "Split Name Wizard"
+msgstr "Wizard separa nome"
 
 #. module: partner_firstname
-#: view:res.partner:partner_firstname.view_partner_form_firstname
-#: view:res.partner:partner_firstname.view_partner_simple_form_firstname
-msgid ""
-"{\n"
-"                    'readonly': [('is_company', '=', False)],\n"
-"                    'required': [('is_company', '=', True)]\n"
-"                }"
-msgstr ""
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "Split name"
+msgstr "Separa nome"
+
+#. module: partner_firstname
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "Split partner name"
+msgstr "Separa nome partner"
+
+#. module: partner_firstname
+#: model:ir.actions.act_window,name:partner_firstname.action_res_partner_split_name_wizard
+msgid "action.res.partner.split.name.wizard"
+msgstr "action.res.partner.split.name.wizard"
+
+#. module: partner_firstname
+#: view:res.partner.split_name_wizard:partner_firstname.res_partner_split_name_wizard_form_view
+msgid "or"
+msgstr "oppure"
+
