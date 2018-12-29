@@ -32,10 +32,12 @@
     'website': 'https://odoo-community.org',
     'depends': ['base_setup'],
     'data': [
+        'wizards/res_partner_split_name_wizard_view.xml',
+
         'views/base_config_view.xml',
         'views/res_partner.xml',
         'views/res_user.xml',
-        'data/res_partner.yml',
+        # 'data/res_partner.yml',
     ],
     'demo': [],
     'test': [],
