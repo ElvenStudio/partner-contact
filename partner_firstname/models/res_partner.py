@@ -20,11 +20,6 @@ class ResPartner(models.Model):
 
     firstname = fields.Char("First name")
     lastname = fields.Char("Last name")
-    name = fields.Char(
-        compute="_compute_name",
-        inverse="_inverse_name_after_cleaning_whitespace",
-        required=False,
-        store=True)
 
     @api.model
     def create(self, vals):
@@ -42,12 +37,6 @@ class ResPartner(models.Model):
             for key, value in inverted.iteritems():
                 if not vals.get(key) or context.get("copy"):
                     vals[key] = value
-
-            # Remove the combined fields
-            if "name" in vals:
-                del vals["name"]
-            if "default_name" in context:
-                del context["default_name"]
 
         return super(ResPartner, self.with_context(context)).create(vals)
 
@@ -89,27 +78,6 @@ class ResPartner(models.Model):
         """
         return self.env['ir.config_parameter'].get_param(
             'partner_names_order', self._names_order_default())
-
-    @api.model
-    def _get_computed_name(self, lastname, firstname):
-        """Compute the 'name' field according to splitted data.
-
-        You can override this method to change the order of lastname and
-        firstname the computed name
-        """
-        order = self._get_names_order()
-        if order == 'last_first_comma':
-            return u", ".join((p for p in (lastname, firstname) if p))
-        elif order == 'first_last':
-            return u" ".join((p for p in (firstname, lastname) if p))
-        else:
-            return u" ".join((p for p in (lastname, firstname) if p))
-
-    @api.one
-    @api.depends("firstname", "lastname")
-    def _compute_name(self):
-        """Write the 'name' field according to splitted data."""
-        self.name = self._get_computed_name(self.lastname, self.firstname)
 
     @api.one
     def _inverse_name_after_cleaning_whitespace(self):
@@ -174,7 +142,7 @@ class ResPartner(models.Model):
             else:
                 while len(parts) < 2:
                     parts.append(False)
-        return {"lastname": parts[0], "firstname": parts[1]}
+        return {"name": name, "lastname": parts[0], "firstname": parts[1]}
 
     @api.one
     def _inverse_name(self):
@@ -184,36 +152,6 @@ class ResPartner(models.Model):
             self.lastname = parts["lastname"]
         if parts["firstname"] != self.firstname:
             self.firstname = parts["firstname"]
-
-    @api.one
-    @api.constrains("firstname", "lastname")
-    def _check_name(self):
-        """Ensure at least one name is set."""
-        if not (self.firstname or self.lastname):
-            raise exceptions.EmptyNamesError(self)
-
-    @api.one
-    @api.onchange("firstname", "lastname")
-    def _onchange_subnames(self):
-        """Avoid recursion when the user changes one of these fields.
-
-        This forces to skip the :attr:`~.name` inversion when the user is
-        setting it in a not-inverted way.
-        """
-        # Modify self's context without creating a new Environment.
-        # See https://github.com/odoo/odoo/issues/7472#issuecomment-119503916.
-        self.env.context = self.with_context(skip_onchange=True).env.context
-
-    @api.one
-    @api.onchange("name")
-    def _onchange_name(self):
-        """Ensure :attr:`~.name` is inverted in the UI."""
-        if self.env.context.get("skip_onchange"):
-            # Do not skip next onchange
-            self.env.context = (
-                self.with_context(skip_onchange=False).env.context)
-        else:
-            self._inverse_name_after_cleaning_whitespace()
 
     @api.model
     def _install_partner_firstname(self):
@@ -231,15 +169,3 @@ class ResPartner(models.Model):
         records._inverse_name()
         _logger.info("%d partners updated installing module.", len(records))
 
-    @api.multi
-    def write(self, vals):
-        name = vals.get('name')
-        if name and all(name == partner.name for partner in self):
-            vals.pop('name', None)
-        # If vals is empty (only write name field and with the same value)
-        # Avoid access checking here
-        # https://github.com/odoo/odoo/blob/
-        #   8b83119fad7ccae9f091f12b6ac89c2c31e4bac3/openerp/addons/base/res/
-        #   res_partner.py#L569
-        this = self.sudo() if not vals else self
-        return super(ResPartner, this).write(vals)

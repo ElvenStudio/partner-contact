@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="res_partner_split_name_wizard_form_view" model="ir.ui.view">
+            <field name="name">Split name</field>
+            <field name="model">res.partner.split_name_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Split partner name">
+                    <group>
+                        <group>
+                            <field name="partner_ids" invisible="1" />
+                            <field name="split_mode" />
+                        </group>
+                        <group></group>
+                    </group>
+                    <p class="oe_grey">
+                        <strong>Note:</strong> Once you choose the split mode and confirm, the operation cannot be undone.
+                    </p>
+                    <footer>
+                        <button name="action_split_name"
+                                string="Split name"
+                                type="object"
+                                class="oe_highlight" />
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_res_partner_split_name_wizard" model="ir.actions.act_window">
+            <field name="name">action.res.partner.split.name.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.split_name_wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="res_partner_split_name_wizard_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>
